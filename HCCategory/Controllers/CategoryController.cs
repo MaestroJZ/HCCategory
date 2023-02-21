@@ -35,7 +35,7 @@ namespace HCCategory.Controllers
             await _dbContext.SaveChangesAsync();
             return category;
         }
-
+        //POST new extra
         [HttpPost("NewExtra")]        
         public async Task<ActionResult<Extra>> CreateProduct(Extra extra)
         {
@@ -45,12 +45,12 @@ namespace HCCategory.Controllers
                 return BadRequest("The category does not exist.");
             }
 
-            //extra.CategoryId = category.Id;
+            
             _dbContext.Extras.Add(extra);
             await _dbContext.SaveChangesAsync();
             return CreatedAtAction(nameof(GetProduct), new { id = extra.Id }, extra);
         }
-
+        //Delete by Name(и даже extra и продукты)
         [HttpDelete("Categories/{name}")]
         public async Task<ActionResult> DeleteCategoryByName(string name)
         {
@@ -109,6 +109,8 @@ namespace HCCategory.Controllers
             if (product == null) { return NotFound(); }
             return product;
         }
+
+        //Post new product
         [HttpPost("NewProduct")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
